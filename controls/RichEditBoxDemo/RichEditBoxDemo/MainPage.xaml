@@ -24,8 +24,8 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="1">
                     <Button FontSize="20" Height="50" Width="50" Content="#" Click="TopicButtonClick"/>
                     <Button Margin="10 0 0 0" FontSize="20" Height="50" Width="50" Content="@" Click="AtButtonClick"/>
-                    <Button Margin="10 0 0 0" FontSize="20" Height="50" Width="50" Content="☺" Click="EmojiButtonClick"/>
-                    <Button Margin="10 0 0 0" FontSize="20" Height="50" Width="200" Content="☺" Click="UpdateButtonClick"/>
+                    <Button Margin="10 0 0 0" FontSize="20" Height="50" Width="50" Content="Url" Click="UrlButtonClick"/>
+                    <Button Margin="10 0 0 0" FontSize="20" Height="50" Width="100" Content="Bold" Click="BoldButtonClick"/>
                 </StackPanel>
             </Grid>
         </Border>
