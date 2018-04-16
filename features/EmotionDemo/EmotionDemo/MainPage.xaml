@@ -1,0 +1,46 @@
+﻿<Page
+    x:Class="EmotionDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EmotionDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="1" Width="100" Content="Load" Click="LoadCustomFontFileButtonClick"/>
+        <Pivot Grid.Row="0" Title="Emoji">
+            <PivotItem Header="Microsoft">
+                <GridView Name="MicrosoftFontCharacters">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontFamily="/Assets/Font/seguiemj.ttf#Segoe UI Emoji"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </PivotItem>
+            <PivotItem Header="Apple">
+                <GridView Name="AppleFontCharacters">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontFamily="/Assets/Font/AppleColorEmoji.ttc#Apple Color Emoji"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </PivotItem>
+            <PivotItem Header="Google">
+                <GridView Name="GoogleFontCharacters">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontFamily="/Assets/Font/NotoColorEmoji.ttf#Noto Color Emoji"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
