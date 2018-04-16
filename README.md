@@ -5,3 +5,7 @@
 ## Text
 
 - [x] RichEditBox
+
+## Feature
+
+- [x] Emoji
