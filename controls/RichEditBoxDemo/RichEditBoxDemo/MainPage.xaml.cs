@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
 namespace RichEditBoxDemo
 {
@@ -23,34 +12,72 @@ namespace RichEditBoxDemo
     {
         readonly ITextSelection _currentSelection;
 
+        List<string> _patterns = new List<string>
+        {
+            @"@[0-9a-zA-Z\u4e00-\u9fa5]+(?=\s|:|/)",
+            @"#[0-9a-zA-Z\u4e00-\u9fa5]+#",
+            @"\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))"
+        };
+
+
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             _currentSelection = ContentRichEditBox.Document.Selection;
             ContentRichEditBox.Document.Selection.Options = SelectionOptions.Active;
             ContentRichEditBox.DisabledFormattingAccelerators = DisabledFormattingAccelerators.All;
             ContentRichEditBox.IsSpellCheckEnabled = false;
-            ContentRichEditBox.ClipboardCopyFormat = RichEditClipboardFormat.PlainText;
             ContentRichEditBox.Paste += ContentRichEditBox_Paste;
             ContentRichEditBox.TextChanged += ContentRichEditBox_TextChanged;
+
             string defualtValue = "@everyone\r#topic#\r[笑脸]\rhttp://www.baidu.com\r☺\r这是毛线啊....";
             ContentRichEditBox.Document.SetText(TextSetOptions.None,defualtValue);
         }
 
+        private string _textValue = string.Empty;
+
+        //使用正则表达式 -> 高亮的文本
         private void ContentRichEditBox_TextChanged(object sender, RoutedEventArgs e)
         {
+            //文本变化时，如果已经失去了焦点，主动获取焦点
             if (ContentRichEditBox.FocusState == FocusState.Unfocused)
             {
                 ContentRichEditBox.Focus(FocusState.Programmatic);
             }
+
+            ContentRichEditBox.Document.GetText(TextGetOptions.None,out var content);
+            if (!string.IsNullOrEmpty(_textValue) && _textValue == content)
+            {
+                return;
+            }
+
+            _textValue = content;
+
+            //重置所有文本颜色，重新匹配高亮
+            ContentRichEditBox.Document.GetRange(0, content.Length).CharacterFormat.ForegroundColor = Colors.Black;
+            
+
+            //通过正则表达式查找
+            foreach (var pattern in _patterns)
+            {
+                var regex = new Regex(pattern);
+                if (!regex.IsMatch(content))
+                    return;
+
+                foreach (Match match in regex.Matches(content))
+                {
+                    var textRange = ContentRichEditBox.Document.GetRange(match.Index, match.Index + match.Length);
+                    textRange.CharacterFormat.ForegroundColor = Colors.Blue;
+                }
+            }
         }
 
+        //来自剪贴板内容的限制
         private void ContentRichEditBox_Paste(object sender, TextControlPasteEventArgs e)
         {
             if (ContentRichEditBox.Document.CanPaste())
             {
-
                 var content = Clipboard.GetContent();
 
                 if (content.Contains("text") ||  content.Contains("rtf"))
@@ -84,17 +111,15 @@ namespace RichEditBoxDemo
             _currentSelection.MoveRight(TextRangeUnit.Character, 1, false);
         }
 
-        private void EmojiButtonClick(object sender, RoutedEventArgs e)
+        private void BoldButtonClick(object sender, RoutedEventArgs e)
         {
-            ContentRichEditBox.Document.Selection.SetText(TextSetOptions.None, "[可爱]");
-            _currentSelection.MoveRight(TextRangeUnit.Character, 1, false);
+            _currentSelection.CharacterFormat.Bold = FormatEffect.Toggle;
         }
 
-        private void UpdateButtonClick(object sender, RoutedEventArgs e)
+        private void UrlButtonClick(object sender, RoutedEventArgs e)
         {
-            var document = ContentRichEditBox.Document;
-            string content = string.Empty;
-            document.GetText(TextGetOptions.None, out content);
+            _currentSelection.SetText(TextSetOptions.None, "http://www.");
+            _currentSelection.MoveRight(TextRangeUnit.Character, 1, false);
         }
     }
 }
