@@ -1,0 +1,81 @@
+﻿<Page
+    x:Class="RichTextBlockDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RichTextBlockDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Border 
+            BorderThickness="1"
+            BorderBrush="AntiqueWhite"
+            Background="AliceBlue"
+            Width="800" 
+            Padding="10"
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <RichTextBlock>
+                    <RichTextBlock.Blocks>
+                        <Paragraph 
+                    LineStackingStrategy="BaselineToBaseline"  
+                    LineHeight="40">
+                            <InlineUIContainer>
+                                <HyperlinkButton Content="#RichTextblock#">
+                                    <HyperlinkButton.RenderTransform>
+                                        <TranslateTransform Y="10"/>
+                                    </HyperlinkButton.RenderTransform>
+                                </HyperlinkButton>
+                            </InlineUIContainer>
+                            <InlineUIContainer>
+                                <HyperlinkButton Content="@敲代码的老年人">
+                                    <HyperlinkButton.RenderTransform>
+                                        <TranslateTransform Y="10"/>
+                                    </HyperlinkButton.RenderTransform>
+                                </HyperlinkButton>
+                            </InlineUIContainer>
+                            <Run FontWeight="Bold">
+                                富文本格式（Rich Text Format, 一般简称为RTF）
+                            </Run>
+                            <Run FontStyle="Italic">
+                                是由微软公司开发的跨平台文档格式。
+                            </Run>
+                            <Run>
+                                RTF是Rich TextFormat的缩写，意即多文本格式
+                            </Run>
+                            <InlineUIContainer>
+                                <Image Width="24" Height="24" Source="Assets/emojis/1.png">
+                                    <Image.RenderTransform>
+                                        <TranslateTransform Y="4"/>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </InlineUIContainer>
+
+                            <InlineUIContainer>
+                                <Image Width="24" Height="24" Source="Assets/emojis/2.png">
+                                    <Image.RenderTransform>
+                                        <TranslateTransform Y="4"/>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </InlineUIContainer>
+
+                            <InlineUIContainer>
+                                <Image Width="24" Height="24" Source="Assets/emojis/3.png">
+                                    <Image.RenderTransform>
+                                        <TranslateTransform Y="4"/>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </InlineUIContainer>
+                        </Paragraph>
+                    </RichTextBlock.Blocks>
+                </RichTextBlock>
+                <RichTextBlock Grid.Column="1" Name="RichTextBlock2"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
