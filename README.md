@@ -5,7 +5,7 @@
 ## Text Controls
 
 - [x] RichEditBox
-- [ ] RichTextBlock
+- [x] RichTextBlock
 
 ## Windows
 
