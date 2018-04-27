@@ -1,0 +1,10 @@
+﻿<Application
+    x:Class="UwpThemeDemo.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UwpThemeDemo"
+    RequestedTheme="Light">
+   <Application.Resources>
+        <x:String x:Key="Text">微软在MWC 2015上首次展示了Win10统一平台战略的“代表作”：Win10通用应用（Windows10 Universal App）平台。在Win10中，所有设备将会运行在一个统一的Windows10系统核心之上。这样的设计使得一款应用可以在所有Win10设备上运行，今后Win10手机、平板电脑、笔记本电脑、PC、Xbox，甚至是3D全息眼镜HoloLens、巨屏触控Surface Hub和物联网设备例如Raspberry Pi 2等都不再有界限。新的通用平台允许新类型的Windows10通用应用真正实现一次编写、一套业务逻辑和统一的用户界面。应用在统一的Win10商店中将只会有一个安装包，而它将适用于所有Win10设备。 [1]  在 Windows 10 Insider Preview 中的 Universal Windows Platform (UWP)借助 Windows 10 UWP 将在 Windows 应用中更上一层楼。</x:String>
+   </Application.Resources>                       
+</Application>
