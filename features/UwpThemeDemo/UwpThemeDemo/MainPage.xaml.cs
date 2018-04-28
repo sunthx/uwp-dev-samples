@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +26,34 @@ namespace UwpThemeDemo
         public MainPage()
         {
             this.InitializeComponent();
+
+            App.RootTheme = ElementTheme.Default;
+        }
+
+        // 0 : System
+        // 1 : Light
+        // 2 : Dark
+        // 3 : Custom
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!(sender is ComboBox themeSelector))
+            {
+               return;
+            }
+
+            var selectedIndex = themeSelector.SelectedIndex;
+            switch (selectedIndex)
+            {
+                case 0:
+                    App.RootTheme = ElementTheme.Default;
+                    break;
+                case 1:
+                    App.RootTheme = ElementTheme.Light;
+                    break;
+                case 2:
+                    App.RootTheme = ElementTheme.Dark;
+                    break;
+            }
         }
     }
 }

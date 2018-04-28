@@ -5,24 +5,27 @@
     xmlns:local="using:UwpThemeDemo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
+    mc:Ignorable="d"
+    d:DesignWidth="300">
+    <Page.Resources>
+        
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        <Border Padding="20 0 0 0" Background="AliceBlue">
+
+        <Border Padding="20 0 0 0" Background="{ThemeResource TitleBorderBackground}">
             <StackPanel
                 VerticalAlignment="Center" 
                 Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" Text="当前主题设置："/>
-                <ComboBox Width="140">
+                <ComboBox Width="140" SelectionChanged="Selector_OnSelectionChanged">
                     <ComboBoxItem>跟随系统</ComboBoxItem>
-                    <ComboBoxItem>Light</ComboBoxItem>
-                    <ComboBoxItem>Dark</ComboBoxItem>
-                    <ComboBoxItem>Custom</ComboBoxItem>
+                    <ComboBoxItem>浅色</ComboBoxItem>
+                    <ComboBoxItem>暗色</ComboBoxItem>
+                    <ComboBoxItem>自定义</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
         </Border>

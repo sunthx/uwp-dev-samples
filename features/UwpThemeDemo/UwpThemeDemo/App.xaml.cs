@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +31,28 @@ namespace UwpThemeDemo
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            RequestedTheme = ApplicationTheme.Light;
+        }
+
+        public static ElementTheme RootTheme
+        {
+            get
+            {
+                if (Window.Current.Content is FrameworkElement rootElement)
+                {
+                    return rootElement.RequestedTheme;
+                }
+
+                return ElementTheme.Default;
+            }
+            set
+            {
+                if (Window.Current.Content is FrameworkElement rootElement)
+                {
+                    rootElement.RequestedTheme = value;
+                }
+            }
         }
 
         /// <summary>
@@ -47,7 +70,6 @@ namespace UwpThemeDemo
             {
                 // 创建要充当导航上下文的框架，并导航到第一页
                 rootFrame = new Frame();
-
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
@@ -68,6 +90,8 @@ namespace UwpThemeDemo
                     // 参数
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
+                
+                
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
