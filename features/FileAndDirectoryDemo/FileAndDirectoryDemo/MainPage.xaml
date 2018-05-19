@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="FileAndDirectoryDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FileAndDirectoryDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <Button Width="140" Content="Select File" Click="Button_Click"/>
+            <Button Width="140" Margin="10 0 0 0" Content="Select Directory" Click="Button_Click_1"/>
+        </StackPanel>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="AliceBlue">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    Text="Selected Files"/>
+
+                <ListView IsItemClickEnabled="True" ItemClick="ListViewBase_OnItemClick" DisplayMemberPath="Name" ItemsSource="{x:Bind StorageFiles}" Grid.Row="1"/>
+            </Grid>
+            <Grid Grid.Column="1" Padding="10 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="SaveAs" Width="140"/>
+                    <TextBlock Margin="10 0 0 0" Name="TbFileName" VerticalAlignment="Center"/>
+                    <TextBlock Margin="10 0 0 0" Name="TbFileProperty" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBox Grid.Row="1" Name="TbContent"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
