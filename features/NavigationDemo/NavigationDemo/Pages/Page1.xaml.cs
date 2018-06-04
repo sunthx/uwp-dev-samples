@@ -34,7 +34,7 @@ namespace NavigationDemo.Pages
 
         private void Page1_Loaded(object sender, RoutedEventArgs e)
         {
-            for (long i = 0; i < 1000000; i++)
+            for (long i = 0; i < 100; i++)
             {
                 temp.Add(Guid.NewGuid().ToString());
             }

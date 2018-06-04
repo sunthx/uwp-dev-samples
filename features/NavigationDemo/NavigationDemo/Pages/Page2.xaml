@@ -13,8 +13,10 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"
                        FontSize="40" Name="Title" Text="Title" Foreground="Wheat"/>
+
             <Button HorizontalAlignment="Center" Grid.Row="1" Foreground="Wheat" Content="GoBack" Width="200" Height="50" Click="Button_Click"/>
         </Grid>
     </Grid>
